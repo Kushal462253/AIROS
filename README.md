@@ -5,8 +5,9 @@
 ### AI Research Operating System
 
 ### Accelerating Scientific Discovery with AI Agents
-
-<img width="1536" height="1024" alt="AIROS cover page" src="https://github.com/user-attachments/assets/4662d9b8-e513-4b75-b26a-564eb7fab8d1" />
+<a href="https://github.com/user-attachments/assets/4662d9b8-e513-4b75-b26a-564eb7fab8d1">
+  <img width="1536" height="1024" alt="AIROS cover page" src="https://github.com/user-attachments/assets/4662d9b8-e513-4b75-b26a-564eb7fab8d1" />
+</a>
 
 <p align="center">
   <img src="assets/cover.png" alt="AIROS Cover" width="100%">
@@ -22,7 +23,14 @@
 Built for the **Google × Kaggle AI Agents: Intensive Vibe Coding Capstone Project**
 
 🎥 **Demo Video:** *(Add YouTube Link)*
-
+<a href="https://youtu.be/s9KUQ1ruQag">
+  <img
+    width="1536"
+    alt="AIROS Cover"
+    src="https://github.com/user-attachments/assets/4662d9b8-e513-4b75-b26a-564eb7fab8d1"
+  />
+</a>
+  
 </div>
 
 ---
@@ -105,47 +113,72 @@ Research Copilot
 
 # System Architecture
 
-> *(Insert Architecture Diagram Here)*
+<a href="https://github.com/user-attachments/assets/4f3bdf9c-14bd-4d98-a111-adff1da9de3a" />
+">
+    <img src="https://github.com/user-attachments/assets/4662d9b8-e513-4b75-b26a-564eb7fab8d1">
+</a>
 
-![Architecture](assets/architecture.png)
 
 ---
 
 # Screenshots
 
+## Authentication
+<img width="1277" height="692" alt="Screenshot 2026-07-06 182622" src="https://github.com/user-attachments/assets/559bad92-543f-4741-ab5d-9fe46e8682f5" />
+<img width="1278" height="697" alt="Screenshot 2026-07-06 182843" src="https://github.com/user-attachments/assets/e6780d57-edf2-4bbb-af1d-d88b630bf2be" />
+
+
+---
+
+
 ## Dashboard
 
-![Dashboard](assets/dashboard.png)
+<img width="1279" height="695" alt="Screenshot 2026-07-06 181648" src="https://github.com/user-attachments/assets/013eaea2-c8bc-47cd-8453-b6d74181e594" />
+
+
+---
+
+
+## Create project
+
+<img width="483" height="530" alt="Screenshot 2026-07-06 184438" src="https://github.com/user-attachments/assets/cbfbdbee-4be7-4861-aefe-b7e20591198f" />
+
+
 
 ---
 
 ## Research Planner
 
-![Planner](assets/planner.png)
+<img width="1279" height="691" alt="Screenshot 2026-07-06 181822" src="https://github.com/user-attachments/assets/e935f731-ee32-4bec-8cbf-fc0895b06376" />
+
 
 ---
 
 ## Literature Workspace
 
-![Literature](assets/literature.png)
+<img width="1279" height="699" alt="Screenshot 2026-07-06 182300" src="https://github.com/user-attachments/assets/b4c87b1f-fcff-4a9a-8322-d112371a7328" />
+
 
 ---
 
 ## Evidence Workspace
 
-![Evidence](assets/evidence.png)
+<img width="1277" height="689" alt="Screenshot 2026-07-06 182325" src="https://github.com/user-attachments/assets/b6ffcab2-552d-4200-8c19-d0e842e38cfc" />
+
 
 ---
 
 ## Knowledge Graph
 
-![Knowledge Graph](assets/knowledge-graph.png)
+<img width="1279" height="683" alt="Screenshot 2026-07-06 182415" src="https://github.com/user-attachments/assets/ade30cea-6ef3-4410-b1cf-63f27c2c1033" />
+
 
 ---
 
 ## Research Copilot
 
-![Copilot](assets/copilot.png)
+<img width="253" height="652" alt="Screenshot 2026-07-06 230543" src="https://github.com/user-attachments/assets/860d0f48-7b6e-430d-96cb-f975b8d6ae02" />
+
 
 ---
 
@@ -251,13 +284,6 @@ cd backend
 uvicorn app.main:app --reload
 ```
 
----
-
-# Demo
-
-🎥 **YouTube Demo**
-
-*(Insert YouTube Link)*
 
 ---
 
