@@ -6,7 +6,8 @@
 
 ### Accelerating Scientific Discovery with AI Agents
 
-<!-- Cover Image -->
+<img width="1536" height="1024" alt="AIROS cover page" src="https://github.com/user-attachments/assets/4662d9b8-e513-4b75-b26a-564eb7fab8d1" />
+
 <p align="center">
   <img src="assets/cover.png" alt="AIROS Cover" width="100%">
 </p>
