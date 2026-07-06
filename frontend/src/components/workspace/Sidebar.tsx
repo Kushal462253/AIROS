@@ -1,12 +1,13 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
 import SidebarItem from "./SidebarItem";
 import UserMenu from "./UserMenu";
 import type { WorkspaceSection } from "@/features/workspace";
+import { collectionsService, type Collection } from "@/services/collections-service";
 
 interface SidebarProps {
   activeSection: WorkspaceSection;
@@ -116,6 +117,17 @@ export default function Sidebar({
   mobileOpen,
   onMobileClose,
 }: SidebarProps) {
+  const [collections, setCollections] = useState<Collection[]>([]);
+
+  useEffect(() => {
+    setCollections(collectionsService.getCollections());
+    const handleUpdate = () => {
+      setCollections(collectionsService.getCollections());
+    };
+    window.addEventListener("airos:collectionsUpdated", handleUpdate);
+    return () => window.removeEventListener("airos:collectionsUpdated", handleUpdate);
+  }, []);
+
   const handleSelect = useCallback(
     (section: WorkspaceSection) => {
       onSectionChange(section);
@@ -172,14 +184,37 @@ export default function Sidebar({
           </p>
         )}
         {mainNav.map((item) => (
-          <SidebarItem
-            key={item.section}
-            label={item.label}
-            icon={item.icon}
-            isActive={activeSection === item.section}
-            onClick={() => handleSelect(item.section)}
-            collapsed={collapsed}
-          />
+          <div key={item.section} className="space-y-1">
+            <SidebarItem
+              label={item.label}
+              icon={item.icon}
+              isActive={activeSection === item.section}
+              onClick={() => handleSelect(item.section)}
+              collapsed={collapsed}
+            />
+            {item.section === "collections" && !collapsed && collections.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="pl-9 pr-2 space-y-1 mt-0.5 mb-1.5 font-mono text-[10px]"
+              >
+                {collections.map((col) => (
+                  <button
+                    key={col.id}
+                    onClick={() => {
+                      handleSelect("collections");
+                      window.dispatchEvent(new CustomEvent("airos:selectCollection", { detail: col.id }));
+                    }}
+                    className="w-full text-left py-1 text-[--text-muted] hover:text-indigo-400 transition-all truncate block relative group"
+                  >
+                    <span className="opacity-40 mr-1.5 group-hover:opacity-100 transition-opacity">•</span>
+                    <span>{col.name}</span>
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </div>
         ))}
       </nav>
 

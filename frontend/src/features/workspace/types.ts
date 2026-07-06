@@ -8,13 +8,6 @@ export interface NavItem {
 
 export type ResearchDepth = "quick" | "standard" | "comprehensive";
 
-export type ResearchType =
-  | "literature_review"
-  | "comparison"
-  | "hypothesis_generation"
-  | "research_gap_analysis"
-  | "general_research";
-
 export type ProjectStatus = "planning" | "active" | "completed" | "archived";
 
 export interface ResearchProject {
@@ -23,13 +16,17 @@ export interface ResearchProject {
   topic: string;
   description: string;
   researchDepth: ResearchDepth;
-  researchType: ResearchType;
+  researchType?: string;
   uploadedPdfName: string | null;
   status: ProjectStatus;
   createdAt: string;
   updatedAt: string;
   paperCount: number;
   tags: string[];
+  favorite?: boolean;
+  pinned?: boolean;
+  archived?: boolean;
+  collectionIds?: string[];
 }
 
 export interface CreateResearchInput {
@@ -37,7 +34,7 @@ export interface CreateResearchInput {
   topic: string;
   description: string;
   researchDepth: ResearchDepth;
-  researchType: ResearchType;
+  researchType?: string;
   uploadedPdfName: string | null;
 }
 
@@ -52,12 +49,4 @@ export const RESEARCH_DEPTH_LABELS: Record<ResearchDepth, string> = {
   quick: "Quick",
   standard: "Standard",
   comprehensive: "Comprehensive",
-};
-
-export const RESEARCH_TYPE_LABELS: Record<ResearchType, string> = {
-  literature_review: "Literature Review",
-  comparison: "Comparison",
-  hypothesis_generation: "Hypothesis Generation",
-  research_gap_analysis: "Research Gap Analysis",
-  general_research: "General Research",
 };

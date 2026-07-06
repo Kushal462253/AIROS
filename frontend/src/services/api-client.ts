@@ -6,9 +6,14 @@ async function request<T>(
 ): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`;
 
+  const headers: Record<string, string> = {};
+  if (!(options.body instanceof FormData)) {
+    headers["Content-Type"] = "application/json";
+  }
+
   const config: RequestInit = {
     headers: {
-      "Content-Type": "application/json",
+      ...headers,
       ...options.headers,
     },
     ...options,
@@ -20,7 +25,7 @@ async function request<T>(
     const error = await response.json().catch(() => ({
       message: "An unexpected error occurred",
     }));
-    throw new Error(error.message || `HTTP ${response.status}`);
+    throw new Error(error.detail || error.message || `HTTP ${response.status}`);
   }
 
   return response.json();
@@ -30,19 +35,23 @@ export const apiClient = {
   get: <T>(endpoint: string, options?: RequestInit) =>
     request<T>(endpoint, { ...options, method: "GET" }),
 
-  post: <T>(endpoint: string, body?: unknown, options?: RequestInit) =>
-    request<T>(endpoint, {
+  post: <T>(endpoint: string, body?: unknown, options?: RequestInit) => {
+    const isFormData = body instanceof FormData;
+    return request<T>(endpoint, {
       ...options,
       method: "POST",
-      body: body ? JSON.stringify(body) : undefined,
-    }),
+      body: isFormData ? (body as FormData) : body ? JSON.stringify(body) : undefined,
+    });
+  },
 
-  put: <T>(endpoint: string, body?: unknown, options?: RequestInit) =>
-    request<T>(endpoint, {
+  put: <T>(endpoint: string, body?: unknown, options?: RequestInit) => {
+    const isFormData = body instanceof FormData;
+    return request<T>(endpoint, {
       ...options,
       method: "PUT",
-      body: body ? JSON.stringify(body) : undefined,
-    }),
+      body: isFormData ? (body as FormData) : body ? JSON.stringify(body) : undefined,
+    });
+  },
 
   delete: <T>(endpoint: string, options?: RequestInit) =>
     request<T>(endpoint, { ...options, method: "DELETE" }),

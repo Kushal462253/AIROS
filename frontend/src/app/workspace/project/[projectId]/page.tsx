@@ -5,12 +5,10 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
 import RouteGuard from "@/features/auth/guards/RouteGuard";
-import {
-  useResearch,
-  RESEARCH_DEPTH_LABELS,
-  RESEARCH_TYPE_LABELS,
-} from "@/features/workspace";
+import { useResearch } from "@/features/workspace";
 import type { ResearchProject } from "@/features/workspace";
+import { ResearchDashboard } from "@/features/dashboard";
+import { MemoryProvider } from "@/features/memory";
 
 /* ── Animation ── */
 
@@ -30,19 +28,6 @@ const itemVariants = {
     transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 };
-
-/* ── Detail card ── */
-
-function DetailItem({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="space-y-1">
-      <p className="text-xs font-medium uppercase tracking-wider text-[--text-muted]">
-        {label}
-      </p>
-      <p className="text-sm text-white">{value}</p>
-    </div>
-  );
-}
 
 /* ── Status badge ── */
 
@@ -106,121 +91,50 @@ function ProjectContent() {
   }
 
   return (
-    <div className="min-h-screen bg-surface-primary">
+    <div className="h-screen w-screen flex flex-col bg-surface-primary overflow-hidden relative research-os-grid">
+      {/* Ambient background particles glow */}
+      <div className="ambient-aurora-glow" />
+
       {/* Top bar */}
-      <header className="border-b border-white/[0.04] bg-surface-secondary/40 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-5xl items-center gap-4 px-6 py-4 lg:px-8">
+      <header className="relative z-10 border-b border-white/[0.04] bg-[#0a0a0f]/60 backdrop-blur-xl">
+        <div className="flex items-center gap-4 px-6 py-2.5">
           <Link
             href="/workspace"
-            className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-[--text-muted] transition-colors hover:bg-white/[0.04] hover:text-white"
+            className="flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-xs font-mono tracking-wide text-[--text-muted] transition-all hover:bg-white/[0.04] hover:text-white"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M19 12H5" />
               <path d="m12 19-7-7 7-7" />
             </svg>
-            Workspace
+            WORKSPACE
           </Link>
-          <div className="h-4 w-px bg-white/[0.06]" />
-          <span className="truncate text-sm font-medium text-white">
-            {project.title}
+          <div className="h-3 w-px bg-white/[0.08]" />
+          <span className="truncate text-xs font-mono text-[--text-muted]">
+            PROJECTS
           </span>
-          <div className="ml-auto">
+          <span className="text-xs text-white/20">/</span>
+          <span className="truncate text-xs font-bold text-white font-mono tracking-wide">
+            {project.title.toUpperCase()}
+          </span>
+          <div className="ml-auto flex items-center gap-3">
+            <span className="text-[10px] font-mono text-[--text-muted] hidden md:inline">Topic: {project.topic}</span>
             <StatusBadge status={project.status} />
           </div>
         </div>
       </header>
 
-      {/* Content */}
+      {/* Content wrapper filling the screen */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="mx-auto max-w-5xl px-6 py-8 lg:px-8"
+        className="flex-1 w-full overflow-hidden p-4 relative z-10"
       >
-        {/* Title section */}
-        <motion.div variants={itemVariants} className="mb-8">
-          <h1 className="mb-2 text-3xl font-bold tracking-tight text-white">
-            {project.title}
-          </h1>
-          <p className="max-w-2xl text-sm leading-relaxed text-[--text-secondary]">
-            {project.topic}
-          </p>
-        </motion.div>
-
-        {/* Details grid */}
-        <motion.div
-          variants={itemVariants}
-          className="glass-panel glow-ring mb-8 grid grid-cols-2 gap-6 rounded-2xl p-6 sm:grid-cols-4"
-        >
-          <DetailItem
-            label="Research Depth"
-            value={RESEARCH_DEPTH_LABELS[project.researchDepth]}
-          />
-          <DetailItem
-            label="Research Type"
-            value={RESEARCH_TYPE_LABELS[project.researchType]}
-          />
-          <DetailItem
-            label="Created"
-            value={new Date(project.createdAt).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
-          />
-          <DetailItem
-            label="Papers"
-            value={String(project.paperCount)}
-          />
-        </motion.div>
-
-        {/* Description */}
-        {project.description && (
-          <motion.div variants={itemVariants} className="glass-panel glow-ring mb-8 rounded-2xl p-6">
-            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[--text-muted]">
-              Description
-            </h2>
-            <p className="text-sm leading-relaxed text-[--text-secondary]">
-              {project.description}
-            </p>
-          </motion.div>
-        )}
-
-        {/* PDF */}
-        {project.uploadedPdfName && (
-          <motion.div variants={itemVariants} className="glass-panel glow-ring mb-8 rounded-2xl p-6">
-            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[--text-muted]">
-              Uploaded Document
-            </h2>
-            <div className="flex items-center gap-3">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#818cf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
-                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-              </svg>
-              <span className="text-sm text-white">
-                {project.uploadedPdfName}
-              </span>
-            </div>
-          </motion.div>
-        )}
-
-        {/* Placeholder for future research workflow */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col items-center py-12 text-center"
-        >
-          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-airos-500/10">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#818cf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
-            </svg>
-          </div>
-          <p className="text-sm font-medium text-white">
-            Research workflow coming soon
-          </p>
-          <p className="mt-1 max-w-xs text-xs text-[--text-muted]">
-            AI-powered research agents will process your project here.
-          </p>
+        {/* Dashboard root view with Memory Provider scope */}
+        <motion.div variants={itemVariants} className="h-full w-full">
+          <MemoryProvider projectId={project.id}>
+            <ResearchDashboard project={project} />
+          </MemoryProvider>
         </motion.div>
       </motion.div>
     </div>

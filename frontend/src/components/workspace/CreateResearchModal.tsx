@@ -7,17 +7,15 @@ import PdfUpload from "./PdfUpload";
 import type {
   CreateResearchInput,
   ResearchDepth,
-  ResearchType,
 } from "@/features/workspace";
 import {
   RESEARCH_DEPTH_LABELS,
-  RESEARCH_TYPE_LABELS,
 } from "@/features/workspace";
 
 interface CreateResearchModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (input: CreateResearchInput) => Promise<void>;
+  onSubmit: (input: Omit<CreateResearchInput, "researchType"> & { researchType?: any }) => Promise<void>;
   isLoading: boolean;
 }
 
@@ -42,13 +40,11 @@ export default function CreateResearchModal({
   const topicId = useId();
   const descId = useId();
   const depthId = useId();
-  const typeId = useId();
 
   const [title, setTitle] = useState("");
   const [topic, setTopic] = useState("");
   const [description, setDescription] = useState("");
   const [researchDepth, setResearchDepth] = useState<ResearchDepth>("standard");
-  const [researchType, setResearchType] = useState<ResearchType>("general_research");
   const [uploadedPdfName, setUploadedPdfName] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -74,7 +70,7 @@ export default function CreateResearchModal({
         topic: topic.trim(),
         description: description.trim(),
         researchDepth,
-        researchType,
+        researchType: "general_research",
         uploadedPdfName,
       });
 
@@ -83,11 +79,10 @@ export default function CreateResearchModal({
       setTopic("");
       setDescription("");
       setResearchDepth("standard");
-      setResearchType("general_research");
       setUploadedPdfName(null);
       setErrors({});
     },
-    [title, topic, description, researchDepth, researchType, uploadedPdfName, validate, onSubmit]
+    [title, topic, description, researchDepth, uploadedPdfName, validate, onSubmit]
   );
 
   const handleClose = useCallback(() => {
@@ -200,61 +195,31 @@ export default function CreateResearchModal({
             />
           </div>
 
-          {/* Depth + Type row */}
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            {/* Research Depth */}
-            <div className="space-y-1.5">
-              <label htmlFor={depthId} className="block text-sm font-medium text-[--text-secondary]">
-                Research Depth
-              </label>
-              <select
-                id={depthId}
-                value={researchDepth}
-                onChange={(e) => setResearchDepth(e.target.value as ResearchDepth)}
-                disabled={isLoading}
-                className="
-                  w-full appearance-none rounded-xl border border-white/[0.06] bg-surface-secondary/50 px-4 py-3 text-sm text-white
-                  outline-none transition-all duration-200
-                  focus:border-airos-500/40 focus:ring-2 focus:ring-airos-500/10 focus:bg-surface-secondary/80
-                  disabled:cursor-not-allowed disabled:opacity-50
-                "
-              >
-                {(Object.entries(RESEARCH_DEPTH_LABELS) as [ResearchDepth, string][]).map(
-                  ([value, label]) => (
-                    <option key={value} value={value} className="bg-surface-secondary text-white">
-                      {label}
-                    </option>
-                  )
-                )}
-              </select>
-            </div>
-
-            {/* Research Type */}
-            <div className="space-y-1.5">
-              <label htmlFor={typeId} className="block text-sm font-medium text-[--text-secondary]">
-                Research Type
-              </label>
-              <select
-                id={typeId}
-                value={researchType}
-                onChange={(e) => setResearchType(e.target.value as ResearchType)}
-                disabled={isLoading}
-                className="
-                  w-full appearance-none rounded-xl border border-white/[0.06] bg-surface-secondary/50 px-4 py-3 text-sm text-white
-                  outline-none transition-all duration-200
-                  focus:border-airos-500/40 focus:ring-2 focus:ring-airos-500/10 focus:bg-surface-secondary/80
-                  disabled:cursor-not-allowed disabled:opacity-50
-                "
-              >
-                {(Object.entries(RESEARCH_TYPE_LABELS) as [ResearchType, string][]).map(
-                  ([value, label]) => (
-                    <option key={value} value={value} className="bg-surface-secondary text-white">
-                      {label}
-                    </option>
-                  )
-                )}
-              </select>
-            </div>
+          {/* Research Depth */}
+          <div className="space-y-1.5">
+            <label htmlFor={depthId} className="block text-sm font-medium text-[--text-secondary]">
+              Research Depth
+            </label>
+            <select
+              id={depthId}
+              value={researchDepth}
+              onChange={(e) => setResearchDepth(e.target.value as ResearchDepth)}
+              disabled={isLoading}
+              className="
+                w-full appearance-none rounded-xl border border-white/[0.06] bg-surface-secondary/50 px-4 py-3 text-sm text-white
+                outline-none transition-all duration-200
+                focus:border-airos-500/40 focus:ring-2 focus:ring-airos-500/10 focus:bg-surface-secondary/80
+                disabled:cursor-not-allowed disabled:opacity-50
+              "
+            >
+              {(Object.entries(RESEARCH_DEPTH_LABELS) as [ResearchDepth, string][]).map(
+                ([value, label]) => (
+                  <option key={value} value={value} className="bg-surface-secondary text-white">
+                    {label}
+                  </option>
+                )
+              )}
+            </select>
           </div>
 
           {/* PDF Upload */}

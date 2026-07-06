@@ -5,14 +5,20 @@ __pycache__/
 *.pyo
 .mypy_cache/
 .ruff_cache/
+.pytest_cache/
 *.egg-info/
 dist/
 build/
+coverage/
 
 # ── Environment ──
+!.env.example
 .env
 .env.local
-.env.*.local
+.env.development
+.env.production
+.env.test
+.env.*
 
 # ── IDE ──
 .vscode/
@@ -22,6 +28,7 @@ build/
 *~
 
 # ── Next.js ──
+.next/
 frontend/.next/
 frontend/out/
 
@@ -35,8 +42,12 @@ pip-wheel-metadata/
 # ── Docker ──
 docker/data/
 
-# ── ChromaDB ──
+# ── Local Databases ──
+backend/data/
+chromadb/
 data/chromadb/
+*.sqlite
+*.db
 
 # ── OS ──
 .DS_Store
@@ -45,4 +56,17 @@ desktop.ini
 
 # ── Logs ──
 *.log
+logs/
 npm-debug.log*
+
+# ── Uploads & Temp ──
+uploads/
+temp/
+tmp/
+cache/
+
+# ── Generated Files ──
+*.zip
+*.tar
+*.gz
+*.old

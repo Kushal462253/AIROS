@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import Providers from "@/providers/Providers";
+import InteractiveResearchBackground from "@/components/workspace/InteractiveResearchBackground";
+import AmbientResearchEngine from "@/components/workspace/AmbientResearchEngine";
 import "./globals.css";
 
 const inter = Inter({
@@ -55,6 +57,8 @@ export default function RootLayout({
       className={`dark ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body className="antialiased">
+        <InteractiveResearchBackground />
+        <AmbientResearchEngine />
         <Providers>{children}</Providers>
       </body>
     </html>
