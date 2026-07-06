@@ -22,7 +22,8 @@ Built for the **Google × Kaggle AI Agents: Intensive Vibe Coding Capstone Proje
 
 🎥 **Demo Video:** *("https://youtu.be/s9KUQ1ruQag")*
 <a href="https://youtu.be/s9KUQ1ruQag">
-  <img width="1536" height="1024" src="[https://github.com/user-attachments/assets/4662d9b8-e513-4b75-b26a-564eb7fab8d1](https://youtu.be/s9KUQ1ruQag)" />
+  <img width="1536" height="1024" alt="Thumbnail AIROS" src="https://github.com/user-attachments/assets/4c05e033-4221-4013-b39a-b7f5d4fc20cf" />
+
 </a>
   
 </div>
