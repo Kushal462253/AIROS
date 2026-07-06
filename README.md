@@ -9,9 +9,7 @@
   <img width="1536" height="1024" alt="AIROS cover page" src="https://github.com/user-attachments/assets/4662d9b8-e513-4b75-b26a-564eb7fab8d1" />
 </a>
 
-<p align="center">
-  <img src="assets/cover.png" alt="AIROS Cover" width="100%">
-</p>
+
 
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=for-the-badge&logo=fastapi&logoColor=white)
@@ -24,7 +22,7 @@ Built for the **Google × Kaggle AI Agents: Intensive Vibe Coding Capstone Proje
 
 🎥 **Demo Video:** *("https://youtu.be/s9KUQ1ruQag")*
 <a href="https://youtu.be/s9KUQ1ruQag">
-  
+  <img width="1536" height="1024" alt="AIROS cover page" src="[https://github.com/user-attachments/assets/4662d9b8-e513-4b75-b26a-564eb7fab8d1](https://youtu.be/s9KUQ1ruQag)" />
 </a>
   
 </div>
@@ -111,7 +109,7 @@ Research Copilot
 
 <a href="https://github.com/user-attachments/assets/4f3bdf9c-14bd-4d98-a111-adff1da9de3a" />
 ">
-   
+   <img width="1536" height="1024" alt="AIROS cover page" src="https://github.com/user-attachments/assets/4f3bdf9c-14bd-4d98-a111-adff1da9de3a" />
 </a>
 
 
