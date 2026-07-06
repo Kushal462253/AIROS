@@ -22,13 +22,9 @@
 
 Built for the **Google × Kaggle AI Agents: Intensive Vibe Coding Capstone Project**
 
-🎥 **Demo Video:** *(Add YouTube Link)*
+🎥 **Demo Video:** *("https://youtu.be/s9KUQ1ruQag")*
 <a href="https://youtu.be/s9KUQ1ruQag">
-  <img
-    width="1536"
-    alt="AIROS Cover"
-    src="https://github.com/user-attachments/assets/4662d9b8-e513-4b75-b26a-564eb7fab8d1"
-  />
+  
 </a>
   
 </div>
@@ -115,7 +111,7 @@ Research Copilot
 
 <a href="https://github.com/user-attachments/assets/4f3bdf9c-14bd-4d98-a111-adff1da9de3a" />
 ">
-    <img src="https://github.com/user-attachments/assets/4662d9b8-e513-4b75-b26a-564eb7fab8d1">
+   
 </a>
 
 
